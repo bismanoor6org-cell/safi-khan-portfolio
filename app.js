@@ -101,6 +101,18 @@
 
   let toastTimer;
   function toast(message) { const el = document.querySelector('.toast'); el.textContent = message; el.classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('visible'), 3300); }
+
+  /* safi-mail-handler */
+  const gmailCompose = 'https://mail.google.com/mail/?view=cm&fs=1&to=safi.khan.personal@gmail.com';
+  document.querySelectorAll('[data-safi-mail]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const opened = window.open(gmailCompose, '_blank', 'noopener,noreferrer');
+      if (!opened) window.location.href = 'mailto:safi.khan.personal@gmail.com';
+    });
+  });
+
   document.querySelector('.copy-button').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText('safi.khan.personal@gmail.com'); toast('Email address copied. Let’s connect.'); }
     catch { toast('Email: safi.khan.personal@gmail.com'); }
